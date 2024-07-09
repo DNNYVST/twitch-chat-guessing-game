@@ -65,15 +65,23 @@ export default function Chat() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col justify-between p-24">
-      <section className="flex flex-col">
-        {messageHistory.map(({ name, color, message }, i) => (
-          <div key={i}>
-            <UserMessage name={name} color={color} message={message} />
-          </div>
-        ))}
+    <main className="grid gap-4 sm:grid-cols-2 my-24 mx-96">
+      {/* leaderboard */}
+      <section className="col-start-2 rounded-md bg-[#282b30] min-h-72 shadow-lg p-4">
+        {initialized && (
+          <>
+            <p>Leaderboard:</p>
+            <button onClick={clearLeaderboard}>clear</button>
+            <section className="max-h-72 overflow-y-scroll">
+              <WinnerHistory
+                winners={JSON.parse(localStorage.winners || "[]") || []}
+              />
+            </section>
+          </>
+        )}
       </section>
-      <section className="flex whitespace-pre-wrap">
+      {/* winner */}
+      <section className="col-span-2 whitespace-pre-wrap rounded-md bg-[#36393e] shadow-lg p-4">
         <h2 className="mb-3 text-2xl font-semibold">winner: </h2>
         <h2
           className="mb-3 text-2xl font-semibold"
@@ -81,20 +89,17 @@ export default function Chat() {
         >
           {winner.name}
         </h2>
-      </section>
-      <section>
         <button
           onClick={() => setWinner({} as Winner)}
-          disabled={!localStorage.winners}
         >{`>reset winner<`}</button>
-        {initialized && (
-          <>
-            <button onClick={clearLeaderboard}>clear leaderboard</button>
-            <WinnerHistory
-              winners={JSON.parse(localStorage.winners || "[]") || []}
-            />
-          </>
-        )}
+      </section>
+      {/* chat */}
+      <section className="col-span-2 bg-[#282b30] rounded-md shadow-lg p-4">
+        {messageHistory.map(({ name, color, message }, i) => (
+          <div key={i}>
+            <UserMessage name={name} color={color} message={message} />
+          </div>
+        ))}
       </section>
     </main>
   );

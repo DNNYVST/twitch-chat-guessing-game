@@ -9,10 +9,9 @@ const client = new tmi.Client({
   channels: ["loltyler1"],
 });
 
-const secretWord = "a";
-
 export default function Chat() {
   const [initialized, setInitialized] = useState(false);
+  const [secretWord, setSecretWord] = useState<string>("a");
   const [lastMessage, setLastMessage] = useState<Message>({} as Message);
   const [messageHistory, setMessageHistory] = useState<Message[]>([]);
   const [winner, setWinner] = useState<Winner>({} as Winner);
@@ -65,23 +64,43 @@ export default function Chat() {
   };
 
   return (
-    <main className="grid gap-4 sm:grid-cols-2 my-24 mx-96">
+    <main className="grid gap-4 sm:grid-cols-2 my-[5%] mx-[5%] sm:mx-[20%]">
+      {/* secret configuration */}
+      <section className="rounded-md bg-[#282b30] h-min shadow-lg p-4">
+        <label
+          htmlFor="secret"
+          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >
+          Secret:{" "}
+        </label>
+        <input
+          id="secret"
+          type="text"
+          value={secretWord}
+          onChange={(e) => setSecretWord(e.target.value)}
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        />
+        <br />
+        <button>SAVE/EDIT</button>
+      </section>
       {/* leaderboard */}
-      <section className="col-start-2 rounded-md bg-[#282b30] min-h-72 shadow-lg p-4">
+      <section className="sm:col-start-2 rounded-md bg-[#282b30] min-h-72 shadow-lg p-4">
         {initialized && (
           <>
-            <p>Leaderboard:</p>
+            <p className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+              Leaderboard:
+            </p>
             <button onClick={clearLeaderboard}>clear</button>
-            <section className="max-h-72 overflow-y-scroll">
+            <div className="overflow-y-scroll max-h-72">
               <WinnerHistory
                 winners={JSON.parse(localStorage.winners || "[]") || []}
               />
-            </section>
+            </div>
           </>
         )}
       </section>
       {/* winner */}
-      <section className="col-span-2 whitespace-pre-wrap rounded-md bg-[#36393e] shadow-lg p-4">
+      <section className="sm:col-span-2 whitespace-pre-wrap rounded-md bg-[#36393e] shadow-lg p-4">
         <h2 className="mb-3 text-2xl font-semibold">winner: </h2>
         <h2
           className="mb-3 text-2xl font-semibold"
@@ -94,7 +113,7 @@ export default function Chat() {
         >{`>reset winner<`}</button>
       </section>
       {/* chat */}
-      <section className="col-span-2 bg-[#282b30] rounded-md shadow-lg p-4">
+      <section className="sm:col-span-2 bg-[#282b30] rounded-md shadow-lg p-4">
         {messageHistory.map(({ name, color, message }, i) => (
           <div key={i}>
             <UserMessage name={name} color={color} message={message} />

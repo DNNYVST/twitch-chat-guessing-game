@@ -6,7 +6,7 @@ export interface Message {
 
 const UserMessage = ({name, color, message}: Message) => (
     <div className="inline-block">
-        <strong style={{color: `${color}`}}>{name}</strong><span className="text-slate-200">: {message}</span>
+        <strong style={{color: `${color}`}}>{name}</strong><span className="text-[#e5e3e8]">: {message}</span>
     </div>
 );
 

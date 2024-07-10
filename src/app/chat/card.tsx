@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 const variants: any = {
-  'default': "bg-[#282b30]",
+  'default': "bg-[#1f1f23]",
   'blurple': "bg-[#6441A4]",
 };
 
@@ -15,7 +15,7 @@ const Card = ({
   children: ReactNode;
 }) => (
   <div className={`rounded-md ${variants[variant]} shadow-lg p-4`}>
-    <p className="block mb-2 text-sm font-medium text-gray-900 dark:text-[#e5e3e8]">
+    <p className="block mb-2 text-sm font-medium dark:text-[#efeff1]">
       {title}
     </p>
     {children}

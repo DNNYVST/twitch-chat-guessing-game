@@ -119,18 +119,20 @@ export default function Chat() {
         </section>
       )}
       {/* chat */}
-      <section className="sm:col-span-2 bg-[#282b30] rounded-md shadow-lg p-4">
-        {initialized && messageHistory.length > 1 ? (
-          <>
-            {messageHistory.map(({ name, color, message }, i) => (
-              <div key={i}>
-                <UserMessage name={name} color={color} message={message} />
-              </div>
-            ))}
-          </>
-        ) : (
-          <ChatPlaceholder />
-        )}
+      <section className="sm:col-span-2">
+        <Card title="Chat">
+          {initialized && messageHistory.length > 1 ? (
+            <>
+              {messageHistory.map(({ name, color, message }, i) => (
+                <div key={i}>
+                  <UserMessage name={name} color={color} message={message} />
+                </div>
+              ))}
+            </>
+          ) : (
+            <ChatPlaceholder />
+          )}
+        </Card>
       </section>
     </main>
   );

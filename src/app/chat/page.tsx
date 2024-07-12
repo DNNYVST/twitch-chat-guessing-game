@@ -50,6 +50,7 @@ export default function Chat() {
     setMessageHistory(history);
     // set winner and update localStorage scoreboard
     if (
+      secretWord &&
       Object.keys(winner).length === 0 &&
       lastMessage?.message?.toLowerCase().includes(secretWord)
     ) {
@@ -72,15 +73,20 @@ export default function Chat() {
       {/* secret configuration */}
       <section className="h-min">
         <Card title="Secret Word">
-          <TextInput
-            title="Enter secret word"
-            placeholder="Enter secret word"
-            id="secretword"
-            value={secretWord}
-            onChange={(e) => setSecretWord(e.target.value)}
-          />
-          
-          <Button aria-label="Save secret word" onClick={() => {}}>
+          <div className="mb-2">
+            <TextInput
+              title="Enter secret word"
+              placeholder="Enter secret word"
+              id="secretword"
+              value={secretWord}
+              onChange={(e) => setSecretWord(e.target.value)}
+            />
+          </div>
+          <Button
+            aria-label="Save secret word"
+            onClick={() => {}}
+            disabled={!secretWord}
+          >
             Save
           </Button>
         </Card>

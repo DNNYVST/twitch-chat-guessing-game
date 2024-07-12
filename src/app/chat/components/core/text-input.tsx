@@ -17,15 +17,12 @@ const TextInput = ({
 }) => (
   <>
     {label && (
-      <label
-        htmlFor={id}
-        className="block text-sm font-medium text-[#efeff1]"
-      >
+      <label htmlFor={id} className="block text-sm font-medium text-[#efeff1]">
         {label}:
       </label>
     )}
     <input
-      className="text-[#efeff1] text-sm font-medium border border-black bg-inherit rounded-sm px-2 py-1"
+      className="text-[#efeff1] text-sm border border-black bg-inherit rounded-sm px-2 py-1 focus:outline-none focus:border-[#9147ff]"
       type="text"
       title={title}
       id={id}

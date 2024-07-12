@@ -57,8 +57,8 @@ export default function Chat() {
       const winner = { ...lastMessage };
       setWinner(winner);
       localStorage.winners = JSON.stringify([
-        ...JSON.parse(localStorage.winners),
         winner,
+        ...JSON.parse(localStorage.winners)
       ]);
     }
   }, [lastMessage]);

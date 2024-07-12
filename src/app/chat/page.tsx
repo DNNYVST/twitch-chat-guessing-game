@@ -3,11 +3,12 @@
 import { useEffect, useState } from "react";
 import tmi from "tmi.js";
 import Card from "./components/core/card";
-import TextInput from "./components/core/text-input";
+import SecretWordForm from "./components/secret-word-form";
+import Leaderboard from "./components/leaderboard";
 import Button from "./components/core/button";
 import UserMessage, { Message } from "./components/user-message";
 import ChatPlaceholder from "./components/chat-placeholder";
-import WinnerHistory, { Winner } from "./components/winner-history";
+import { Winner } from "./components/winner-history";
 
 const client = new tmi.Client({
   channels: ["loltyler1"],
@@ -58,7 +59,7 @@ export default function Chat() {
       setWinner(winner);
       localStorage.winners = JSON.stringify([
         winner,
-        ...JSON.parse(localStorage.winners)
+        ...JSON.parse(localStorage.winners),
       ]);
     }
   }, [lastMessage]);
@@ -73,41 +74,17 @@ export default function Chat() {
       {/* secret configuration */}
       <section className="h-min">
         <Card title="Secret Word">
-          <div className="mb-2">
-            <TextInput
-              title="Enter secret word"
-              placeholder="Enter secret word"
-              id="secretword"
-              value={secretWord}
-              onChange={(e) => setSecretWord(e.target.value)}
-            />
-          </div>
-          <Button
-            aria-label="Save secret word"
-            onClick={() => {}}
-            disabled={!secretWord}
-          >
-            Save
-          </Button>
+          <SecretWordForm onSubmit={setSecretWord} />
         </Card>
       </section>
       {/* leaderboard */}
-      <section className="sm:col-start-2 min-h-72">
-        <Card title="Leaderboard">
-          {initialized && (
-            <>
-              <Button aria-label="Clear leaderboard" onClick={clearLeaderboard}>
-                Clear
-              </Button>
-              <div className="mt-2 overflow-y-scroll max-h-72">
-                <WinnerHistory
-                  winners={JSON.parse(localStorage.winners || "[]") || []}
-                />
-              </div>
-            </>
-          )}
-        </Card>
-      </section>
+      {initialized && (
+        <section className="sm:col-start-2 min-h-72">
+          <Card title="Leaderboard">
+            <Leaderboard winners={JSON.parse(localStorage.winners || "[]")}/>
+          </Card>
+        </section>
+      )}
       {/* winner */}
       {Object.keys(winner).length > 0 && (
         <section className="whitespace-pre-wrap sm:col-span-2">

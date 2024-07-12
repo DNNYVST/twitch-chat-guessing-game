@@ -72,7 +72,7 @@ export default function Chat() {
     <main className="grid gap-4 sm:grid-cols-2 my-[5%] mx-[5%] sm:mx-[20%]">
       {/* secret configuration */}
       <section className="h-min">
-        <Card title="Secret Word">
+        <Card title="Setup">
           <SecretWordForm onSubmit={setSecretWord} />
         </Card>
       </section>

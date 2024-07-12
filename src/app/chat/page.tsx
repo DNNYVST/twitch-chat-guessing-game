@@ -99,7 +99,7 @@ export default function Chat() {
               <Button aria-label="Clear leaderboard" onClick={clearLeaderboard}>
                 Clear
               </Button>
-              <div className="overflow-y-scroll max-h-72">
+              <div className="mt-2 overflow-y-scroll max-h-72">
                 <WinnerHistory
                   winners={JSON.parse(localStorage.winners || "[]") || []}
                 />

@@ -4,11 +4,10 @@ import { useEffect, useState } from "react";
 import tmi from "tmi.js";
 import Card from "./components/core/card";
 import SecretWordForm from "./components/secret-word-form";
-import Leaderboard from "./components/leaderboard";
+import Leaderboard, { Winner } from "./components/leaderboard";
 import Button from "./components/core/button";
 import UserMessage, { Message } from "./components/user-message";
 import ChatPlaceholder from "./components/chat-placeholder";
-import { Winner } from "./components/winner-history";
 
 const client = new tmi.Client({
   channels: ["loltyler1"],
@@ -81,7 +80,7 @@ export default function Chat() {
       {initialized && (
         <section className="sm:col-start-2 min-h-72">
           <Card title="Leaderboard">
-            <Leaderboard winners={JSON.parse(localStorage.winners || "[]")}/>
+            <Leaderboard winners={JSON.parse(localStorage.winners || "[]")} />
           </Card>
         </section>
       )}

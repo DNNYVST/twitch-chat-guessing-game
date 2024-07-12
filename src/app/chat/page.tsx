@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from "react";
 import tmi from "tmi.js";
-import Card from "./card";
-import Button from "./button";
-import UserMessage, { Message } from "./user-message";
-import ChatPlaceholder from "./chat-placeholder";
-import WinnerHistory, { Winner } from "./winner-history";
+import Card from "./components/core/card";
+import Button from "./components/core/button";
+import UserMessage, { Message } from "./components/user-message";
+import ChatPlaceholder from "./components/chat-placeholder";
+import WinnerHistory, { Winner } from "./components/winner-history";
 
 const client = new tmi.Client({
   channels: ["loltyler1"],
@@ -85,7 +85,7 @@ export default function Chat() {
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           />
           <br />
-          <Button aria-label="Save">Subscribe</Button>
+          <Button aria-label="Save secret word" onClick={() => {}}>Save</Button>
         </Card>
       </section>
       {/* leaderboard */}
@@ -93,7 +93,9 @@ export default function Chat() {
         <Card title="Leaderboard">
           {initialized && (
             <>
-              <Button onClick={clearLeaderboard}>Clear</Button>
+              <Button aria-label="Clear leaderboard" onClick={clearLeaderboard}>
+                Clear
+              </Button>
               <div className="overflow-y-scroll max-h-72">
                 <WinnerHistory
                   winners={JSON.parse(localStorage.winners || "[]") || []}
@@ -114,6 +116,7 @@ export default function Chat() {
               {winner.name}
             </h2>
             <Button
+              aria-label="Reset winner"
               onClick={() => setWinner({} as Winner)}
             >{`Reset winner`}</Button>
           </Card>

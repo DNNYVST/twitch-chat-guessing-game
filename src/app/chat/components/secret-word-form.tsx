@@ -13,7 +13,7 @@ const SecretWordForm = ({ onSubmit }: { onSubmit: Function }) => {
           placeholder="Enter secret word"
           id="secretword"
           value={value}
-          onChange={({ target: { value } }) => setValue(value)}
+          onChange={({ target: { value } }) => setValue(value.trim())}
         />
       </div>
       <Button

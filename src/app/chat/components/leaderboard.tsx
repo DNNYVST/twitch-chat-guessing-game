@@ -1,8 +1,9 @@
 import Button from "./core/button";
 export interface Winner {
-    name: string;
-    color: string;
-  }
+  name: string;
+  color: string;
+}
+
 const clearLeaderboard = () => {
   localStorage.clear();
   localStorage.winners = JSON.stringify([]);

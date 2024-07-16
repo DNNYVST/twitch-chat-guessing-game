@@ -54,7 +54,9 @@ export default function Chat() {
     // reset leaderboard?
     // todo if the chat successfully reconnects clear the leaderboard, winner modal, etc
     localStorage.channelName = channelName;
-    return () => client.disconnect();
+    return () => {
+      client.disconnect();
+    };
   }, [channelName]);
 
   useEffect(() => {

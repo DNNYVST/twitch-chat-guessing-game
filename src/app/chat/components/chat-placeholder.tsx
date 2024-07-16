@@ -1,8 +1,13 @@
+import LoadingSpinner from "./icons/loading-spinner";
+
 const chatRowWidths = [75, 80, 50, 65, 80];
 
 const ChatPlaceholder = () => (
   <div role="status" className="animate-pulse">
-    <p className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+    <p className="flex mb-2 text-sm font-medium text-[#efeff1]">
+      <span className="mr-2">
+        <LoadingSpinner />
+      </span>
       Loading chat...
     </p>
     {chatRowWidths.map((width, index) => (

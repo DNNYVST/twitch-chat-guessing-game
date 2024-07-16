@@ -9,10 +9,6 @@ import Button from "./components/core/button";
 import UserMessage, { Message } from "./components/user-message";
 import ChatPlaceholder from "./components/chat-placeholder";
 
-const client = new tmi.Client({
-  channels: ["simply"],
-});
-
 export default function Chat() {
   const [initialized, setInitialized] = useState<boolean>(false);
   const [channelName, setChannelName] = useState<string>("");
@@ -22,7 +18,9 @@ export default function Chat() {
   const [winner, setWinner] = useState<Winner>({} as Winner);
 
   useEffect(() => {
-    // set up client and event handler
+    const client = new tmi.Client({
+      channels: [channelName],
+    });
     client.connect();
     client.on(
       "message",
@@ -34,13 +32,11 @@ export default function Chat() {
         });
       }
     );
-    // set scoreboard localStorage variable
-    if (!localStorage.winners) {
-      localStorage.winners = JSON.stringify([]);
-    }
+    // reset leaderboard
+    localStorage.winners = JSON.stringify([]);
     // set initialized to true for render logic
     setInitialized(true);
-  }, []);
+  }, [channelName]);
 
   useEffect(() => {
     // keep track of last 5 messages only
@@ -63,11 +59,6 @@ export default function Chat() {
       ]);
     }
   }, [lastMessage]);
-
-  const clearLeaderboard = () => {
-    localStorage.clear();
-    localStorage.winners = JSON.stringify([]);
-  };
 
   return (
     <main className="grid gap-4 sm:grid-cols-2 my-[5%] mx-[5%] sm:mx-[20%]">
@@ -117,7 +108,15 @@ export default function Chat() {
               ))}
             </>
           ) : (
-            <ChatPlaceholder />
+            <>
+              {channelName ? (
+                <ChatPlaceholder />
+              ) : (
+                <p className="text-sm font-medium animate-pulse">
+                  Enter a channel name to begin!
+                </p>
+              )}
+            </>
           )}
         </Card>
       </section>

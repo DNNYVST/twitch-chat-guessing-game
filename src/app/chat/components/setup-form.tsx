@@ -15,9 +15,9 @@ const SetupForm = ({
   const [channelNameLock, setChannelNameLock] = useState<boolean>(false);
   const [secretWord, setSecretWord] = useState<string>("");
 
-  const onClickSaveChannelName = (e: any) => {
+  const onClickSaveChannelName = () => {
     setChannelNameLock(true);
-    onSaveChannelName(e.target.value);
+    onSaveChannelName(channelName);
   };
 
   return (

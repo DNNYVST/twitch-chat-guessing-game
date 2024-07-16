@@ -36,25 +36,25 @@ export default function Chat() {
     const client = new tmi.Client({
       channels: [channelName],
     });
-    client
-      .connect()
-      .then(() => {
-        client.on(
-          "message",
-          (channel: string, tags: any, message: string, self: boolean) => {
-            setLastMessage({
-              name: tags["display-name"],
-              color: tags.color === "#000000" ? "#FFFFFF" : tags.color,
-              message: message,
-            });
-          }
-        );
-      })
-      .catch(console.error);
+    client.connect();
+    client.on(
+      "message",
+      (channel: string, tags: any, message: string, self: boolean) => {
+        setLastMessage({
+          name: tags["display-name"],
+          color: tags.color === "#000000" ? "#FFFFFF" : tags.color,
+          message: message,
+        });
+      }
+    );
+    client.on("disconnected", (reason: any) => {
+      console.log("disconnected");
+    });
 
     // reset leaderboard?
     // todo if the chat successfully reconnects clear the leaderboard, winner modal, etc
     localStorage.channelName = channelName;
+    return () => client.disconnect();
   }, [channelName]);
 
   useEffect(() => {

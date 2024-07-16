@@ -84,11 +84,11 @@ const SetupForm = ({
         disabled={channelNameLock}
       />
       <p
-        className={`my-2 text-xs font-bold italic text-[#FF8280] ${
+        className={`my-2 text-xs italic text-[#FF8280] ${
           channelNameLock && "opacity-40"
         }`}
       >
-        * Changing channel name will reload chat and clear the leaderboard
+        Changing channel name will reload chat and clear the leaderboard
       </p>
       <EditOrSaveButton
         editOrSaveCondition={channelNameLock}

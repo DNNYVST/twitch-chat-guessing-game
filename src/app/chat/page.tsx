@@ -3,18 +3,19 @@
 import { useEffect, useState } from "react";
 import tmi from "tmi.js";
 import Card from "./components/core/card";
-import SecretWordForm from "./components/secret-word-form";
+import SetupForm from "./components/setup-form";
 import Leaderboard, { Winner } from "./components/leaderboard";
 import Button from "./components/core/button";
 import UserMessage, { Message } from "./components/user-message";
 import ChatPlaceholder from "./components/chat-placeholder";
 
 const client = new tmi.Client({
-  channels: ["loltyler1"],
+  channels: ["simply"],
 });
 
 export default function Chat() {
-  const [initialized, setInitialized] = useState(false);
+  const [initialized, setInitialized] = useState<boolean>(false);
+  const [channelName, setChannelName] = useState<string>("");
   const [secretWord, setSecretWord] = useState<string>("");
   const [lastMessage, setLastMessage] = useState<Message>({} as Message);
   const [messageHistory, setMessageHistory] = useState<Message[]>([]);
@@ -73,7 +74,10 @@ export default function Chat() {
       {/* secret configuration */}
       <section className="h-min">
         <Card title="Setup">
-          <SecretWordForm onSubmit={setSecretWord} />
+          <SetupForm
+            onSaveChannelName={setChannelName}
+            onSaveSecretWord={setSecretWord}
+          />
         </Card>
       </section>
       {/* leaderboard */}

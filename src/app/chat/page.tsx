@@ -18,6 +18,21 @@ export default function Chat() {
   const [winner, setWinner] = useState<Winner>({} as Winner);
 
   useEffect(() => {
+    // initial setup
+    if (!localStorage.channelName) {
+      localStorage.channelName = "";
+    } else {
+      setChannelName(localStorage.channelName);
+    }
+    if (!localStorage.winners) {
+      localStorage.winners = JSON.stringify([]);
+    }
+    // set initialized to true for render logic
+    setInitialized(true);
+  }, []);
+
+  useEffect(() => {
+    if (!channelName) return;
     const client = new tmi.Client({
       channels: [channelName],
     });
@@ -32,10 +47,8 @@ export default function Chat() {
         });
       }
     );
-    // reset leaderboard
-    localStorage.winners = JSON.stringify([]);
-    // set initialized to true for render logic
-    setInitialized(true);
+    // reset leaderboard?
+    localStorage.channelName = channelName;
   }, [channelName]);
 
   useEffect(() => {
@@ -62,64 +75,71 @@ export default function Chat() {
 
   return (
     <main className="grid gap-4 sm:grid-cols-2 my-[5%] mx-[5%] sm:mx-[20%]">
-      {/* secret configuration */}
-      <section className="h-min">
-        <Card title="Setup">
-          <SetupForm
-            onSaveChannelName={setChannelName}
-            onSaveSecretWord={setSecretWord}
-          />
-        </Card>
-      </section>
-      {/* leaderboard */}
       {initialized && (
-        <section className="sm:col-start-2 min-h-72">
-          <Card title="Leaderboard">
-            <Leaderboard winners={JSON.parse(localStorage.winners || "[]")} />
-          </Card>
-        </section>
-      )}
-      {/* winner */}
-      {Object.keys(winner).length > 0 && (
-        <section className="whitespace-pre-wrap sm:col-span-2">
-          <Card title="Winner">
-            <h2
-              className="mb-3 text-2xl font-semibold"
-              style={{ color: `${winner.color}` }}
-            >
-              {winner.name}
-            </h2>
-            <Button
-              aria-label="Reset winner"
-              onClick={() => setWinner({} as Winner)}
-            >{`Reset winner`}</Button>
-          </Card>
-        </section>
-      )}
-      {/* chat */}
-      <section className="sm:col-span-2">
-        <Card title="Chat">
-          {initialized && messageHistory.length > 1 ? (
-            <>
-              {messageHistory.map(({ name, color, message }, i) => (
-                <div key={i}>
-                  <UserMessage name={name} color={color} message={message} />
-                </div>
-              ))}
-            </>
-          ) : (
-            <>
-              {channelName ? (
-                <ChatPlaceholder />
-              ) : (
-                <p className="text-sm font-medium animate-pulse">
-                  Enter a channel name to begin!
-                </p>
-              )}
-            </>
+        <>
+          {/* secret configuration */}
+          <section className="h-min">
+            <Card title="Setup">
+              <SetupForm
+                initialChannelName={channelName}
+                onSaveChannelName={setChannelName}
+                onSaveSecretWord={setSecretWord}
+              />
+            </Card>
+          </section>
+          {/* leaderboard */}
+          <section className="sm:col-start-2 min-h-72">
+            <Card title="Leaderboard">
+              <Leaderboard winners={JSON.parse(localStorage.winners || "[]")} />
+            </Card>
+          </section>
+          {/* winner */}
+          {Object.keys(winner).length > 0 && (
+            <section className="whitespace-pre-wrap sm:col-span-2">
+              <Card title="Winner">
+                <h2
+                  className="mb-3 text-2xl font-semibold"
+                  style={{ color: `${winner.color}` }}
+                >
+                  {winner.name}
+                </h2>
+                <Button
+                  aria-label="Reset winner"
+                  onClick={() => setWinner({} as Winner)}
+                >{`Reset winner`}</Button>
+              </Card>
+            </section>
           )}
-        </Card>
-      </section>
+          {/* chat */}
+          <section className="sm:col-span-2">
+            <Card title="Chat">
+              {messageHistory.length > 1 ? (
+                <>
+                  {messageHistory.map(({ name, color, message }, i) => (
+                    <div key={i}>
+                      <UserMessage
+                        name={name}
+                        color={color}
+                        message={message}
+                      />
+                    </div>
+                  ))}
+                </>
+              ) : (
+                <>
+                  {channelName ? (
+                    <ChatPlaceholder />
+                  ) : (
+                    <p className="text-sm font-medium animate-pulse">
+                      Enter a channel name to begin!
+                    </p>
+                  )}
+                </>
+              )}
+            </Card>
+          </section>
+        </>
+      )}
     </main>
   );
 }

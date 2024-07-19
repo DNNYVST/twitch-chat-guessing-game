@@ -48,10 +48,10 @@ export default function Chat() {
       }
     );
     client.on("disconnected", (reason: any) => {
-      console.log("disconnected");
+      // TODO
+      // reset leaderboard?
     });
 
-    // reset leaderboard?
     // todo if the chat successfully reconnects clear the leaderboard, winner modal, etc
     localStorage.channelName = channelName;
     return () => {
@@ -112,7 +112,7 @@ export default function Chat() {
                   {winner.name}
                 </h2>
                 <Button
-                  aria-label="Reset winner"
+                  ariaLabel="Reset winner"
                   onClick={() => setWinner({} as Winner)}
                 >{`Reset winner`}</Button>
               </Card>

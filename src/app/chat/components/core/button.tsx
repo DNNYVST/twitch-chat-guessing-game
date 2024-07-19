@@ -1,6 +1,9 @@
-import { MouseEventHandler } from "react";
+import { ComponentPropsWithoutRef } from "react";
 
-type ButtonTypes = "button" | "reset" | "submit" | undefined;
+interface ButtonProps extends ComponentPropsWithoutRef<"button"> {
+  ariaLabel: string;
+  variant?: ButtonVariants;
+}
 
 type ButtonVariants = "primary" | "secondary" | undefined;
 
@@ -11,22 +14,13 @@ const variants: any = {
 
 const Button = ({
   children,
-  onClick,
-  type,
+  ariaLabel,
   variant = "primary",
-  disabled = false,
-}: {
-  children: any;
-  onClick: MouseEventHandler<HTMLButtonElement>;
-  type?: ButtonTypes;
-  variant?: ButtonVariants;
-  disabled?: boolean;
-}) => (
+  ...rest
+}: ButtonProps) => (
   <button
     className={`text-[#efeff1] ${variants[variant]} text-sm font-semibold rounded-sm text-sm px-2 py-1 disabled:opacity-40 disabled:hover:bg-[#9147ff] disabled:italic`}
-    type={type || "button"}
-    onClick={onClick}
-    disabled={disabled}
+    {...rest}
   >
     {children}
   </button>

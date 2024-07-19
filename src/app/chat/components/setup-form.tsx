@@ -18,7 +18,7 @@ const EditOrSaveButton = ({
   <>
     {editOrSaveCondition ? (
       <Button
-        aria-label="Edit secret word"
+        ariaLabel="Edit secret word"
         onClick={onClickEditButton}
         variant="secondary"
       >
@@ -29,7 +29,7 @@ const EditOrSaveButton = ({
       </Button>
     ) : (
       <Button
-        aria-label="Save secret word"
+        ariaLabel="Save secret word"
         onClick={onClickSaveButton}
         disabled={saveButtonDisabled}
       >
@@ -76,9 +76,10 @@ const SetupForm = ({
     <>
       {/* Channel name */}
       <TextInput
+        ariaLabel="Enter channel name"
+        id="channelname"
         title="Enter channel name"
         placeholder="Enter channel name"
-        id="channelname"
         value={channelName}
         onChange={({ target: { value } }) => setChannelName(value.trim())}
         disabled={channelNameLock}
@@ -99,9 +100,10 @@ const SetupForm = ({
       {/* Secret word */}
       <div className="mt-8 mb-2">
         <TextInput
+          ariaLabel="Enter secret word"
+          id="secretword"
           title="Enter secret word"
           placeholder="Enter secret word"
-          id="secretword"
           value={secretWord}
           onChange={({ target: { value } }) => setSecretWord(value.trim())}
           disabled={secretWordLock}

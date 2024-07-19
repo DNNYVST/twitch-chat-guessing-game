@@ -2,12 +2,11 @@
 
 import { useEffect, useState } from "react";
 import tmi from "tmi.js";
-import Card from "./components/core/card";
 import SetupForm from "./components/setup-form";
 import Leaderboard, { Winner } from "./components/leaderboard";
-import Button from "./components/core/button";
-import UserMessage, { Message } from "./components/user-message";
-import ChatPlaceholder from "./components/chat-placeholder";
+import { Message } from "./components/user-message";
+import Chat from "./components/chat";
+import WinnerModal from "./components/winner-modal";
 
 export default function Page() {
   const [initialized, setInitialized] = useState<boolean>(false);
@@ -86,89 +85,32 @@ export default function Page() {
       {initialized && (
         <div className="flex flex-col items-stretch space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
           <section className="flex flex-col w-full space-y-4 sm:w-2/3">
-            {/* secret configuration */}
+            {/* setup */}
             <section className="h-min">
-              <Card title="Setup">
-                <SetupForm
-                  initialChannelName={channelName}
-                  onSaveChannelName={setChannelName}
-                  onSaveSecretWord={setSecretWord}
-                />
-              </Card>
+              <SetupForm
+                initialChannelName={channelName}
+                onSaveChannelName={setChannelName}
+                onSaveSecretWord={setSecretWord}
+              />
             </section>
             {/* chat */}
             <section className="h-full">
-              <Card title="Chat">
-                {messageHistory.length > 1 ? (
-                  <>
-                    {messageHistory.map(({ name, color, message }, i) => (
-                      <div key={i}>
-                        <UserMessage
-                          name={name}
-                          color={color}
-                          message={message}
-                        />
-                      </div>
-                    ))}
-                  </>
-                ) : (
-                  <>
-                    {channelName ? (
-                      <ChatPlaceholder />
-                    ) : (
-                      <p className="text-sm font-medium animate-pulse">
-                        Enter a channel name to begin!
-                      </p>
-                    )}
-                  </>
-                )}
-              </Card>
+              <Chat messages={messageHistory} channelName={channelName} />
             </section>
           </section>
           {/* leaderboard */}
           <section className="sm:w-1/3 min-h-72">
-            <Card title="Leaderboard">
-              <Leaderboard winners={JSON.parse(localStorage.winners || "[]")} />
-            </Card>
+            <Leaderboard winners={JSON.parse(localStorage.winners || "[]")} />
           </section>
         </div>
       )}
-      <>
-        {/* winner */}
-        {Object.keys(winner).length > 0 && (
-          <div className="flex w-[100vw] h-[100vh] top-0 left-0 absolute bg-[#0E0E10] bg-opacity-60">
-            <section className="w-1/4 m-auto rounded-md shadow-xl">
-              <Card title="Winner!">
-                <div className="text-center">
-                  <h2
-                    className="mb-3 text-2xl font-semibold"
-                    style={{ color: `${winner.color}` }}
-                  >
-                    {winner.name}
-                  </h2>
-                  <div className="space-x-4">
-                    <Button
-                      ariaLabel="Replay same word"
-                      onClick={() => setWinner({} as Winner)}
-                    >
-                      Replay same word
-                    </Button>
-                    <Button
-                      ariaLabel="New secret word"
-                      onClick={() => {
-                        /* TODO */
-                      }}
-                      variant="secondary"
-                    >
-                      New secret word
-                    </Button>
-                  </div>
-                </div>
-              </Card>
-            </section>
-          </div>
-        )}
-      </>
+      {/* winner modal */}
+      {Object.keys(winner).length > 0 && (
+        <WinnerModal
+          winner={winner}
+          onClickReplay={() => setWinner({} as Winner)}
+        />
+      )}
     </main>
   );
 }

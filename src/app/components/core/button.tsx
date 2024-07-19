@@ -5,11 +5,12 @@ interface ButtonProps extends ComponentPropsWithoutRef<"button"> {
   variant?: ButtonVariants;
 }
 
-type ButtonVariants = "primary" | "secondary" | undefined;
+type ButtonVariants = "primary" | "secondary" | "destructive" | undefined;
 
 const variants: any = {
   primary: "bg-[#9147ff] hover:bg-[#772ce8]",
   secondary: "bg-[#53535f61] hover:bg-[#9147ff]",
+  destructive: "bg-[#53535f61] hover:bg-[#ff4f4d]",
 };
 
 const Button = ({

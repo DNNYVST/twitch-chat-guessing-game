@@ -1,4 +1,6 @@
 import Button from "./core/button";
+import Card from "./core/card";
+
 export interface Winner {
   name: string;
   color: string;
@@ -11,14 +13,19 @@ const clearLeaderboard = () => {
 
 const Leaderboard = ({ winners }: { winners: Winner[] }) => {
   return (
-    <>
-      <Button
-        ariaLabel="Clear leaderboard"
-        onClick={clearLeaderboard}
-        disabled={!winners.length}
-      >
-        Clear
-      </Button>
+    <Card
+      title="Leaderboard"
+      button={
+        <Button
+          ariaLabel="Clear leaderboard"
+          onClick={clearLeaderboard}
+          disabled={!winners.length}
+          variant="destructive"
+        >
+          Clear
+        </Button>
+      }
+    >
       <div className="mt-2 overflow-y-scroll min-h-72 max-h-[348px]">
         <>
           {(winners || []).map((winner, index) => (
@@ -32,7 +39,7 @@ const Leaderboard = ({ winners }: { winners: Winner[] }) => {
           ))}
         </>
       </div>
-    </>
+    </Card>
   );
 };
 

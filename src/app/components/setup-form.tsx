@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, MouseEventHandler } from "react";
+import Card from "./core/card";
 import TextInput from "./core/text-input";
 import Button from "./core/button";
 import Locked from "./icons/locked";
@@ -83,7 +84,7 @@ const SetupForm = ({
   };
 
   return (
-    <>
+    <Card title="Setup">
       {/* Channel name */}
       <TextInput
         ariaLabel="Enter channel name"
@@ -125,7 +126,7 @@ const SetupForm = ({
         onClickSaveButton={onClickSaveSecretWord}
         saveButtonDisabled={!secretWord}
       />
-    </>
+    </Card>
   );
 };
 

@@ -13,7 +13,7 @@ const Leaderboard = ({ winners }: { winners: Winner[] }) => {
   return (
     <>
       <Button
-        aria-label="Clear leaderboard"
+        ariaLabel="Clear leaderboard"
         onClick={clearLeaderboard}
         disabled={!winners.length}
       >

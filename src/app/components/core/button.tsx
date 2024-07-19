@@ -20,6 +20,7 @@ const Button = ({
 }: ButtonProps) => (
   <button
     className={`text-[#efeff1] ${variants[variant]} text-sm font-semibold rounded-sm text-sm px-2 py-1 disabled:opacity-40 disabled:hover:bg-[#9147ff] disabled:italic disabled:cursor-not-allowed`}
+    aria-label={ariaLabel}
     {...rest}
   >
     {children}

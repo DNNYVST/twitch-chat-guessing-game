@@ -87,7 +87,7 @@ export default function Page() {
         <div className="flex flex-col items-stretch space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
           <section className="flex flex-col w-full space-y-4 sm:w-2/3">
             {/* secret configuration */}
-            <section className="h-3/6">
+            <section className="h-min">
               <Card title="Setup">
                 <SetupForm
                   initialChannelName={channelName}
@@ -97,7 +97,7 @@ export default function Page() {
               </Card>
             </section>
             {/* chat */}
-            <section className="h-3/6">
+            <section className="h-full">
               <Card title="Chat">
                 {messageHistory.length > 1 ? (
                   <>

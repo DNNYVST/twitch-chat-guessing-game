@@ -82,7 +82,7 @@ export default function Page() {
   }, [lastMessage]);
 
   return (
-    <main className="flex flex-col space-y-4 my-[5%] mx-[5%] sm:mx-[20%]">
+    <main className="my-[5%] mx-[5%] sm:mx-[20%]">
       {initialized && (
         <div className="flex flex-col items-stretch space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
           <section className="flex flex-col w-full space-y-4 sm:w-2/3">
@@ -136,20 +136,37 @@ export default function Page() {
       <>
         {/* winner */}
         {Object.keys(winner).length > 0 && (
-          <section className="w-full whitespace-pre-wrap">
-            <Card title="Winner">
-              <h2
-                className="mb-3 text-2xl font-semibold"
-                style={{ color: `${winner.color}` }}
-              >
-                {winner.name}
-              </h2>
-              <Button
-                ariaLabel="Reset winner"
-                onClick={() => setWinner({} as Winner)}
-              >{`Reset winner`}</Button>
-            </Card>
-          </section>
+          <div className="flex w-[100vw] h-[100vh] top-0 left-0 absolute bg-[#0E0E10] bg-opacity-60">
+            <section className="w-1/4 m-auto rounded-md shadow-xl">
+              <Card title="Winner!">
+                <div className="text-center">
+                  <h2
+                    className="mb-3 text-2xl font-semibold"
+                    style={{ color: `${winner.color}` }}
+                  >
+                    {winner.name}
+                  </h2>
+                  <div className="space-x-4">
+                    <Button
+                      ariaLabel="Replay same word"
+                      onClick={() => setWinner({} as Winner)}
+                    >
+                      Replay same word
+                    </Button>
+                    <Button
+                      ariaLabel="New secret word"
+                      onClick={() => {
+                        /* TODO */
+                      }}
+                      variant="secondary"
+                    >
+                      New secret word
+                    </Button>
+                  </div>
+                </div>
+              </Card>
+            </section>
+          </div>
         )}
       </>
     </main>

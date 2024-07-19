@@ -14,7 +14,7 @@ const TextInput = ({ ariaLabel, id, label = "", ...rest }: TextInputProps) => (
       </label>
     )}
     <input
-      className="text-[#efeff1] text-sm border border-black bg-inherit rounded-sm px-2 py-1 focus:outline-none focus:border-[#9147ff] disabled:opacity-40 disabled:italic"
+      className="text-[#efeff1] text-sm border border-black bg-inherit rounded-sm px-2 py-1 focus:outline-none focus:border-[#9147ff] disabled:opacity-40 disabled:italic disabled:cursor-not-allowed"
       type="text"
       aria-label={ariaLabel}
       {...rest}

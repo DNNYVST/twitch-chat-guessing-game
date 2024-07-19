@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect, MouseEventHandler } from "react";
 import TextInput from "./core/text-input";
 import Button from "./core/button";
@@ -14,33 +16,41 @@ const EditOrSaveButton = ({
   onClickEditButton: MouseEventHandler<HTMLButtonElement>;
   onClickSaveButton: MouseEventHandler<HTMLButtonElement>;
   saveButtonDisabled: boolean;
-}) => (
-  <>
-    {editOrSaveCondition ? (
-      <Button
-        ariaLabel="Edit secret word"
-        onClick={onClickEditButton}
-        variant="secondary"
-      >
-        <div className="flex">
-          <Locked />
-          <span className="ml-1">Edit</span>
-        </div>
-      </Button>
-    ) : (
-      <Button
-        ariaLabel="Save secret word"
-        onClick={onClickSaveButton}
-        disabled={saveButtonDisabled}
-      >
-        <div className="flex">
-          <Unlocked />
-          <span className="ml-1">Save</span>
-        </div>
-      </Button>
-    )}
-  </>
-);
+}) => {
+  const [hover, setHover] = useState<boolean>(false);
+
+  return (
+    <>
+      {editOrSaveCondition ? (
+        <Button
+          ariaLabel="Edit secret word"
+          onClick={onClickEditButton}
+          variant="secondary"
+          onMouseEnter={() => setHover(true)}
+          onMouseLeave={() => setHover(false)}
+        >
+          <div className="flex">
+            {hover ? <Unlocked /> : <Locked />}
+            <span className="ml-1">Edit</span>
+          </div>
+        </Button>
+      ) : (
+        <Button
+          ariaLabel="Save secret word"
+          onClick={onClickSaveButton}
+          disabled={saveButtonDisabled}
+          onMouseEnter={() => setHover(true)}
+          onMouseLeave={() => setHover(false)}
+        >
+          <div className="flex">
+            {hover ? <Locked /> : <Unlocked />}
+            <span className="ml-1">Save</span>
+          </div>
+        </Button>
+      )}
+    </>
+  );
+};
 
 const SetupForm = ({
   initialChannelName = "",

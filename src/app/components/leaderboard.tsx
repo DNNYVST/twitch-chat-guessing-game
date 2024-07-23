@@ -11,19 +11,27 @@ const clearLeaderboard = () => {
   localStorage.winners = JSON.stringify([]);
 };
 
-const Leaderboard = ({ winners }: { winners: Winner[] }) => {
+const Leaderboard = ({
+  winners,
+  showClearButton = true,
+}: {
+  winners: Winner[];
+  showClearButton?: boolean;
+}) => {
   return (
     <Card
       title="Leaderboard"
       button={
-        <Button
-          ariaLabel="Clear leaderboard"
-          onClick={clearLeaderboard}
-          disabled={!winners.length}
-          variant="destructive"
-        >
-          Clear
-        </Button>
+        showClearButton && (
+          <Button
+            ariaLabel="Clear leaderboard"
+            onClick={clearLeaderboard}
+            disabled={!winners.length}
+            variant="destructive"
+          >
+            Clear
+          </Button>
+        )
       }
     >
       <div className="mt-2 overflow-y-scroll min-h-72 max-h-[348px]">

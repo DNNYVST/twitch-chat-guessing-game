@@ -2,17 +2,15 @@
 
 import { useEffect, useState } from "react";
 import tmi from "tmi.js";
-import Link from "next/link";
-import SetupForm from "./components/setup-form";
-import Leaderboard, { Winner } from "./components/leaderboard";
-import { Message } from "./components/user-message";
-import Chat from "./components/chat";
-import WinnerModal from "./components/winner-modal";
+import Leaderboard, { Winner } from "../components/leaderboard";
+import { Message } from "../components/user-message";
+import Chat from "../components/chat";
+import WinnerModal from "../components/winner-modal";
 
 export default function Page() {
   const [initialized, setInitialized] = useState<boolean>(false);
-  const [streamerMode, setStreamerMode] = useState<boolean>(false);
   const [channelName, setChannelName] = useState<string>("");
+  // TODO -- get secretWord from localStorage?
   const [secretWord, setSecretWord] = useState<string>("");
   const [lastMessage, setLastMessage] = useState<Message>({} as Message);
   const [messageHistory, setMessageHistory] = useState<Message[]>([]);
@@ -83,44 +81,19 @@ export default function Page() {
   }, [lastMessage]);
 
   return (
-    <main className="my-[2%] mx-[5%] sm:mx-[20%]">
-      <Link
-        href="/stream-view"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex justify-end mb-[1%] text-[#efeff1] text-sm font-medium underline underline-offset-4 decoration-[#9147ff] decoration-2"
-      >
-        Stream View (new tab)
-      </Link>
+    <main className="my-[5%] mx-[5%] sm:mx-[20%]">
       {initialized && (
-        <div className="flex flex-col items-stretch space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
-          <section className="flex flex-col w-full space-y-4 sm:w-2/3">
-            {/* setup */}
-            <section className="h-min">
-              <SetupForm
-                initialChannelName={channelName}
-                onSaveChannelName={setChannelName}
-                onSaveSecretWord={setSecretWord}
-              />
-            </section>
-            {/* chat */}
-            <section className="h-full">
-              <Chat messages={messageHistory} channelName={channelName} />
-            </section>
+        <div className="flex flex-col space-y-4">
+          {/* chat */}
+          <section className="overflow-y-scroll h-3/6">
+            <Chat messages={messageHistory} channelName={channelName} />
           </section>
           {/* leaderboard */}
-          <section
-            className={`sm:w-1/3 min-h-72 ${
-              streamerMode &&
-              "outline outline-[#00b8b8] outline-offset-4 rounded-md"
-            }`}
-          >
-            <Leaderboard winners={JSON.parse(localStorage.winners || "[]")} />
-            {streamerMode && (
-              <div className="h-min">
-                <Chat messages={messageHistory} channelName={channelName} />
-              </div>
-            )}
+          <section className="">
+            <Leaderboard
+              winners={JSON.parse(localStorage.winners || "[]")}
+              showClearButton={false}
+            />
           </section>
         </div>
       )}

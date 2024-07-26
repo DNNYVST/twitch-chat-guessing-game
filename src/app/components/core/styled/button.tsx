@@ -1,5 +1,6 @@
 import { ComponentPropsWithoutRef } from "react";
 import styled, { css } from "styled-components";
+import { disabled, smallFont } from "./styles";
 
 type ButtonVariants = "primary" | "secondary" | "destructive" | undefined;
 
@@ -31,18 +32,13 @@ const VARIANTS = {
 const Button = styled.button<{ variant?: ButtonVariants }>`
   color: #efeff1;
 
-  font-size: 0.875rem;
-  line-height: 1.25rem;
+  ${smallFont}
   font-weight: 600;
 
-  border-radius: 0.125em;
-  padding: 0.25em 0.5em;
+  border-radius: 0.125rem;
+  padding: 0.25rem 0.5rem;
 
-  &:disabled {
-    opacity: 0.4;
-    font-style: italic;
-    cursor: not-allowed;
-  }
+  ${disabled}
 
   ${({ variant }) => variant && VARIANTS[variant]}
 `;

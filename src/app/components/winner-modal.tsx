@@ -2,7 +2,7 @@ import { MouseEventHandler } from "react";
 import { useTransition, animated, config } from "@react-spring/web";
 import { Winner } from "./leaderboard";
 import Card from "./core/card";
-import Button from "./core/button";
+import Button from "./core/styled/button";
 
 const WinnerModal = ({
   winner,
@@ -41,13 +41,13 @@ const WinnerModal = ({
                   </h2>
                   <div className="space-x-4">
                     <Button
-                      ariaLabel="Replay same word"
+                      aria-label="Replay same word"
                       onClick={onClickReplay}
                     >
                       Replay same word
                     </Button>
                     <Button
-                      ariaLabel="New secret word"
+                      aria-label="New secret word"
                       onClick={() => {
                         /* TODO */
                       }}

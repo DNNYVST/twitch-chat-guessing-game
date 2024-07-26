@@ -1,4 +1,5 @@
-import Button from "./core/button";
+import Button from "./core/styled/button";
+
 import Card from "./core/card";
 
 export interface Winner {
@@ -24,7 +25,7 @@ const Leaderboard = ({
       button={
         showClearButton && (
           <Button
-            ariaLabel="Clear leaderboard"
+            aria-label="Clear leaderboard"
             onClick={clearLeaderboard}
             disabled={!winners.length}
             variant="destructive"

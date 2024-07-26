@@ -3,7 +3,7 @@
 import { useState, useEffect, MouseEventHandler } from "react";
 import Card from "./core/card";
 import TextInput from "./core/text-input";
-import Button from "./core/button";
+import Button from "./core/styled/button";
 import Locked from "./icons/locked";
 import Unlocked from "./icons/unlocked";
 
@@ -24,7 +24,7 @@ const EditOrSaveButton = ({
     <>
       {editOrSaveCondition ? (
         <Button
-          ariaLabel="Edit secret word"
+          aria-label="Edit secret word"
           onClick={onClickEditButton}
           variant="secondary"
           onMouseEnter={() => setHover(true)}
@@ -37,7 +37,7 @@ const EditOrSaveButton = ({
         </Button>
       ) : (
         <Button
-          ariaLabel="Save secret word"
+          aria-label="Save secret word"
           onClick={onClickSaveButton}
           disabled={saveButtonDisabled}
           onMouseEnter={() => setHover(true)}

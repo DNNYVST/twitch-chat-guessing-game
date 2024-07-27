@@ -1,9 +1,8 @@
 import { ReactNode } from "react";
-import styled, { css } from "styled-components";
-import { smallFont } from "./styles";
+import styled from "styled-components";
+import { smallFont, fontWeightSemiBold } from "./styles";
 
 const Container = styled.div`
-  display: block;
   background: #1f1f23;
   border: 1px solid black;
   border-radius: 0.375rem;
@@ -14,10 +13,9 @@ const Container = styled.div`
 
 const Title = styled.p`
   color: #efeff1;
-  display: block;
   margin-bottom: 0.5rem;
   ${smallFont}
-  font-weight: 500;
+  ${fontWeightSemiBold}
 `;
 
 const Card = ({

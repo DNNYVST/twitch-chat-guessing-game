@@ -12,3 +12,11 @@ export const smallFont = css`
   font-size: 0.875rem;
   line-height: 1.25rem;
 `;
+
+export const fontWeightMedium = css`
+  font-weight: 500;
+`;
+
+export const fontWeightSemiBold = css`
+  font-weight: 600;
+`;

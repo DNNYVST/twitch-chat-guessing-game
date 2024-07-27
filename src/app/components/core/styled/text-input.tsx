@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef } from "react";
 import styled from "styled-components";
-import { disabled, smallFont } from "./styles";
+import { disabled, smallFont, fontWeightMedium } from "./styles";
 
 interface TextInputProps extends ComponentPropsWithoutRef<"input"> {
   id: string;
@@ -14,7 +14,7 @@ const Container = styled.div`
 
 const Label = styled.label`
   display: block;
-  font-weight: 500;
+  ${fontWeightMedium}
 `;
 
 const Input = styled.input`

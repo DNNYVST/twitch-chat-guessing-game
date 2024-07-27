@@ -1,7 +1,8 @@
-import Button from "./core/styled/button";
-
 import Card from "./core/styled/card";
-
+import Button from "./core/styled/button";
+import { Username } from "./user-message";
+import styled from "styled-components";
+import { smallFont, fontWeightMedium } from "../components/core/styled/styles";
 export interface Winner {
   name: string;
   color: string;
@@ -11,6 +12,11 @@ const clearLeaderboard = () => {
   localStorage.clear();
   localStorage.winners = JSON.stringify([]);
 };
+
+const UsernameWrapper = styled(Username)`
+  ${smallFont}
+  ${fontWeightMedium}
+`;
 
 const Leaderboard = ({
   winners,
@@ -38,13 +44,9 @@ const Leaderboard = ({
       <div className="mt-2 overflow-y-scroll min-h-72 max-h-[348px]">
         <>
           {(winners || []).map((winner, index) => (
-            <p
-              key={index}
-              className="text-sm font-medium"
-              style={{ color: `${winner.color}` }}
-            >
+            <UsernameWrapper key={index} color={winner.color}>
               {winner.name}
-            </p>
+            </UsernameWrapper>
           ))}
         </>
       </div>

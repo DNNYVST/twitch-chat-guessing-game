@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef } from "react";
 import styled, { css } from "styled-components";
-import { disabled, smallFont } from "./styles";
+import { disabled, smallFont, fontWeightSemiBold } from "./styles";
 
 type ButtonVariants = "primary" | "secondary" | "destructive" | undefined;
 
@@ -33,7 +33,7 @@ const Button = styled.button<{ variant?: ButtonVariants }>`
   color: #efeff1;
 
   ${smallFont}
-  font-weight: 600;
+  ${fontWeightSemiBold}
 
   border-radius: 0.125rem;
   padding: 0.25rem 0.5rem;

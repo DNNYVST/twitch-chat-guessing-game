@@ -2,7 +2,14 @@
 
 import { useEffect, useState } from "react";
 import tmi from "tmi.js";
-import Link from "next/link";
+import {
+  Main,
+  Container,
+  SetupSection,
+  ChatSection,
+  LeaderboardSection,
+  StyledLink,
+} from "./page.styled";
 import SetupForm from "./components/setup-form";
 import Leaderboard, { Winner } from "./components/leaderboard";
 import { Message } from "./components/user-message";
@@ -43,7 +50,7 @@ export default function Page() {
       (channel: string, tags: any, message: string, self: boolean) => {
         setLastMessage({
           name: tags["display-name"],
-          color: tags.color === "#000000" ? "#FFFFFF" : tags.color,
+          color: tags.color,
           message: message,
         });
       }
@@ -83,46 +90,29 @@ export default function Page() {
   }, [lastMessage]);
 
   return (
-    <main className="my-[2%] mx-[5%] sm:mx-[20%]">
-      <Link
-        href="/stream-view"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex justify-end mb-[1%] text-[#efeff1] text-sm font-medium underline underline-offset-4 decoration-[#9147ff] decoration-2"
-      >
+    <Main>
+      <StyledLink href="/stream-view" target="_blank" rel="noopener noreferrer">
         Stream View (new tab)
-      </Link>
+      </StyledLink>
       {initialized && (
-        <div className="flex flex-col items-stretch space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
-          <section className="flex flex-col w-full space-y-4 sm:w-2/3">
-            {/* setup */}
-            <section className="h-min">
-              <SetupForm
-                initialChannelName={channelName}
-                onSaveChannelName={setChannelName}
-                onSaveSecretWord={setSecretWord}
-              />
-            </section>
-            {/* chat */}
-            <section className="h-full">
-              <Chat messages={messageHistory} channelName={channelName} />
-            </section>
-          </section>
-          {/* leaderboard */}
-          <section
-            className={`sm:w-1/3 min-h-72 ${
-              streamerMode &&
-              "outline outline-[#00b8b8] outline-offset-4 rounded-md"
-            }`}
-          >
+        <Container>
+          <SetupSection>
+            <SetupForm
+              initialChannelName={channelName}
+              onSaveChannelName={setChannelName}
+              onSaveSecretWord={setSecretWord}
+            />
+          </SetupSection>
+          <ChatSection>
+            <Chat messages={messageHistory} channelName={channelName} />
+          </ChatSection>
+          <LeaderboardSection>
             <Leaderboard winners={JSON.parse(localStorage.winners || "[]")} />
             {streamerMode && (
-              <div className="h-min">
-                <Chat messages={messageHistory} channelName={channelName} />
-              </div>
+              <Chat messages={messageHistory} channelName={channelName} />
             )}
-          </section>
-        </div>
+          </LeaderboardSection>
+        </Container>
       )}
       {/* winner modal */}
       {Object.keys(winner).length > 0 && (
@@ -131,6 +121,6 @@ export default function Page() {
           onClickReplay={() => setWinner({} as Winner)}
         />
       )}
-    </main>
+    </Main>
   );
 }

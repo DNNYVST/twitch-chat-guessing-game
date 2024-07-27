@@ -62,3 +62,29 @@ export const StyledLink = styled(Link)`
   text-decoration-thickness: 0.125rem;
   text-underline-offset: 0.25rem;
 `;
+
+export const FlexContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  @media (min-width: 640px) {
+    flex-direction: row;
+  }
+`;
+
+export const FlexLeftSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  @media (min-width: 640px) {
+    width: 66%;
+  }
+`;
+
+export const FlexLeaderboardSection = styled.div`
+  @media (min-width: 640px) {
+    width: 34%;
+  }
+`;

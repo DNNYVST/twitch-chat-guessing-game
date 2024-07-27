@@ -151,3 +151,24 @@ example of nested grid:
   </Column>
 </Grid>
 */
+
+/*
+example of flex implementation:
+
+<FlexContainer>
+  <FlexLeftSection>
+    <SetupForm
+      initialChannelName={channelName}
+      onSaveChannelName={setChannelName}
+      onSaveSecretWord={setSecretWord}
+    />
+    <Chat messages={messageHistory} channelName={channelName} />
+  </FlexLeftSection>
+  <FlexLeaderboardSection>
+    <Leaderboard winners={JSON.parse(localStorage.winners || "[]")} />
+    {streamerMode && (
+      <Chat messages={messageHistory} channelName={channelName} />
+    )}
+  </FlexLeaderboardSection>
+</FlexContainer>
+*/

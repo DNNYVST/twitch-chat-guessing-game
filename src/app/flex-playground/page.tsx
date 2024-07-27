@@ -1,7 +1,7 @@
 "use client";
 
 import styled, { css } from "styled-components";
-import Button from "../components/core/styled/button";
+import {Button} from "../components/core/styled/button";
 
 const Container = styled.div`
   display: grid;

@@ -124,3 +124,30 @@ export default function Page() {
     </Main>
   );
 }
+
+/*
+example of nested grid:
+
+<Grid>
+  <Column size={8}>
+    <Grid>
+      <Column size={12}>
+        <SetupForm
+          initialChannelName={channelName}
+          onSaveChannelName={setChannelName}
+          onSaveSecretWord={setSecretWord}
+        />
+      </Column>
+      <Column size={12}>
+        <Chat messages={messageHistory} channelName={channelName} />
+      </Column>
+    </Grid>
+  </Column>
+  <Column size={4}>
+    <Leaderboard winners={JSON.parse(localStorage.winners || "[]")} />
+    {streamerMode && (
+      <Chat messages={messageHistory} channelName={channelName} />
+    )}
+  </Column>
+</Grid>
+*/

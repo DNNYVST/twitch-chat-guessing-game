@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, MouseEventHandler } from "react";
-import Card from "./core/card";
+import Card from "./core/styled/card";
 import TextInput from "./core/styled/text-input";
 import Button from "./core/styled/button";
 import Locked from "./icons/locked";

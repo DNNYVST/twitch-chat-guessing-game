@@ -1,4 +1,4 @@
-import Card from "./core/card";
+import Card from "./core/styled/card";
 import UserMessage, { Message } from "./user-message";
 import ChatPlaceholder from "./chat-placeholder";
 

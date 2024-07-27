@@ -1,7 +1,7 @@
 import { MouseEventHandler } from "react";
 import { useTransition, animated, config } from "@react-spring/web";
 import { Winner } from "./leaderboard";
-import Card from "./core/card";
+import Card from "./core/styled/card";
 import Button from "./core/styled/button";
 
 const WinnerModal = ({

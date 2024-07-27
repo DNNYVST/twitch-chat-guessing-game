@@ -1,6 +1,6 @@
 import Button from "./core/styled/button";
 
-import Card from "./core/card";
+import Card from "./core/styled/card";
 
 export interface Winner {
   name: string;

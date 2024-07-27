@@ -1,5 +1,5 @@
-import Card from "./core/styled/card";
-import Button from "./core/styled/button";
+import { Card } from "./core/styled/card";
+import { Button } from "./core/styled/button";
 import { Username } from "./user-message";
 import styled from "styled-components";
 import { smallFont, fontWeightMedium } from "../components/core/styled/styles";

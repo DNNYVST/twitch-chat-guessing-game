@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef } from "react";
 import styled, { css } from "styled-components";
-import { disabled, smallFont, fontWeightSemiBold } from "./styles";
+import { disabled, smallFont, fontWeightSemiBold } from "../styles";
 
 type ButtonVariants = "primary" | "secondary" | "destructive" | undefined;
 

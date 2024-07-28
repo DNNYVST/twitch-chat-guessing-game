@@ -80,7 +80,9 @@ const SetupForm = ({
 
   const onClickSaveSecretWord = () => {
     setSecretWordLock(true);
-    onSaveSecretWord(secretWord);
+    const trimmedSecretWord: string = secretWord.trim();
+    onSaveSecretWord(trimmedSecretWord);
+    setSecretWord(trimmedSecretWord);
   };
 
   return (
@@ -116,7 +118,7 @@ const SetupForm = ({
           title="Enter secret word"
           placeholder="Enter secret word"
           value={secretWord}
-          onChange={({ target: { value } }) => setSecretWord(value.trim())}
+          onChange={({ target: { value } }) => setSecretWord(value)}
           disabled={secretWordLock}
         />
       </div>
@@ -124,7 +126,7 @@ const SetupForm = ({
         editOrSaveCondition={secretWordLock}
         onClickEditButton={() => setSecretWordLock(false)}
         onClickSaveButton={onClickSaveSecretWord}
-        saveButtonDisabled={!secretWord}
+        saveButtonDisabled={!secretWord.trim()}
       />
     </Card>
   );

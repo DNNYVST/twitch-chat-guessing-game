@@ -3,7 +3,7 @@ import { smallFont, fontWeightSemiBold } from "../styles";
 
 export const Container = styled.div`
   background: #1f1f23;
-  border: 1px solid black;
+  border: 1px solid #48484b;
   border-radius: 0.375rem;
   padding: 1rem;
   height: 100%;

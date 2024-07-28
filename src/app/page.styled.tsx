@@ -61,6 +61,10 @@ export const StyledLink = styled(Link)`
   text-decoration-color: #9147ff;
   text-decoration-thickness: 0.125rem;
   text-underline-offset: 0.25rem;
+
+  &:hover {
+    text-decoration-color: #772ce8;
+  }
 `;
 
 export const FlexContainer = styled.div`
